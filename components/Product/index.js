@@ -14,6 +14,8 @@ constructor (id, title, body, containerToAppend) {
     <p>${body}</p>
     <button data-add = "${id}" class = "add__to_cart_btn">In cart</button>
    `;
+ 
+
     // ----------- get container to append products
     this.containerToAppend = containerToAppend;
     this.appendProduct(this.containerToAppend);
@@ -21,11 +23,14 @@ constructor (id, title, body, containerToAppend) {
     this.arrayToSet = [];
     // ----------- get add to cart button
     this.addToCartBtn = this.product.querySelector('.add__to_cart_btn');
+    this.productTitle = this.product.querySelector('.post__title');
+    this.productBody = this.product.querySelector('p');
     // ----------- add to cart action function 
     this.addToCartAction(this.addToCartBtn, this.arrayToSet);
     
 }
 
+ 
 // Append products in container that was declared
 appendProduct = (containerToAppend) => {
     containerToAppend.append(this.product);
@@ -38,13 +43,13 @@ addToCartAction = (button, arrayToSet) => {
 
         if(localStorage.length === 0) {
 
-            arrayToSet.push({id: e.target.dataset.add})
+            arrayToSet.push({id: e.target.dataset.add, title: this.productTitle.innerText, body: this.productBody.innerText })
             localStorage.setItem('cartObject', JSON.stringify(arrayToSet));
             cartCounter.innerText = JSON.parse(localStorage.cartObject).length;
             
         } else {
             arrayToSet = JSON.parse(localStorage.getItem('cartObject'));
-            arrayToSet.push({id:  this.addToCartBtn.dataset.add});
+            arrayToSet.push({id: e.target.dataset.add, title: this.productTitle.innerText, body: this.productBody.innerText});
             localStorage.setItem('cartObject', JSON.stringify(arrayToSet));
             cartCounter.innerText = JSON.parse(localStorage.cartObject).length;
         }

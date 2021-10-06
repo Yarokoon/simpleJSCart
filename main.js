@@ -18,9 +18,12 @@ getData().then((result) => {
       /*
       ** ---- Get product class   
       */
-      const product = new Product(id, title, body, postsContainer);
+     new Product(id, title, body, postsContainer);
         
     }); 
 })
+ 
+
+
 
 
